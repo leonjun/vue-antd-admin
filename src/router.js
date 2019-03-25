@@ -7,46 +7,58 @@ import Children from './views/Children.vue'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      
-      component: Home
+      path: '/',   
+      component: Home,
+      redirect: { name: "about" },
+      hidden:true
     },
     {
       path: '/about',
       name: 'about',
+      id:1,
+      icon:"team",
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component:About //() => import(/* webpackChunkName: "about" */ './views/About.vue')
-    },
-    {
-      path:'/table',
-      name:'table',
-      component:Table,
-      hasChild:true,
+      component:Home, //() => import(/* webpackChunkName: "about" */ './views/About.vue')
       children:[
         {       
-            path: '/table/children',
-            name: 'ch',
-            component: Children
+            path: '/about',
+            component: About
         }
       ]
     },
     {
-      path:'/table',
-      name:'tfff',
-      component:Table,
+      path:'/',
+      name:'table',
+      icon:"book",
+      component:Home,
       hasChild:true,
       children:[
         {       
-            path: '/table/children',
+            path: '/table/table',
+            id:2,
+            name: 'table',
+            component: Table
+        }
+      ]
+    },
+    {
+      icon:"project",
+      path:'/',
+      name:'tfff',
+      component:Home,
+      hasChild:true,
+      children:[
+        {   
+            id:3,    
+            path: '/table/about',
             name: 'chi',
-            component: Children
+            component: About
         }
       ]
     }
